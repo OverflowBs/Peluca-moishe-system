@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Peluca-moishe-system</title>
+</head>
+<body>
+
+    <!-- contenedor general -->
+    <div class="contenedor-pagina">
+        
+        <!-- menu lateral -->
+        <div class="menu-lateral">
+
+            <!-- Logo -->
+            <img class="logo">
+
+            <!-- Bienvenida de usuario -->
+            <h5>Bienvenido, {{nombreApellidoUsuarioLogueado}}.</h5>
+
+            <!-- Nav -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('usuarios') }}"><i class="icono fa-solid fa-gear"></i>Usuarios</a></li>
+                    <li class="current"><a href="{{ url_for('clientes') }}"><i class="icono fa-solid fa-users"></i>Clientes</a></li>
+                    <li><a href="{{ url_for('trabajos') }}"><i class="icono fa-solid fa-thumbtack"></i>Trabajos</a></li>
+                    <li><a href="{{ url_for('turnos') }}"><i class="icono fa-solid fa-sack-dollar"></i>Facturación</a></li>
+                    <li><a href="{{ url_for('turnos') }}"><i class="icono fa-solid fa-calendar-days"></i>Turnos</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido de pagina -->
+        <div class="contenido-pagina">
+
+            <h2>Administración de Clientes</h2>
+
+            <!-- seccion de carga de datos -->
+            <div class="carga-datos">
+
+                <form class="formulario" action="submit">
+
+                    <!-- contenedor de campos de formulario -->
+                    <div class="campos">
+
+                        <div class="campo">
+                            <label for="formEmail">Email</label>
+                            <input type="email" id="formEmail" placeholder="nombre@ejemplo.com" name="formEmail">
+                        </div>
+                        <div class="campo">
+                            <label for="formNombre">Nombre</label>
+                            <input type="text" id="formNombre" name="formNombre">
+                        </div>
+                        <div class="campo">
+                            <label for="formApellido">Apellido</label>
+                            <input type="text" id="formApellido" name="formApellido">
+                        </div>
+                        <div class="campo">
+                            <label for="formCelular">Celular</label>
+                            <input type="text" id="formCelular" name="formCelular">
+                        </div>
+                    </div>
+
+                    <!-- contenedor para botones de formulario -->
+                    <div class="botones">
+                        <button type="button" class="btn btn-primary">Nuevo</button>
+                        <button type="submit" class="btn btn-success">Aplicar</button>
+                        <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- seccion de visualizacion de datos -->
+            <div class="visualizacion-datos">
+                <table class="tabla">
+                <thead>
+                    <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{cliente[0]}}</td>
+                        <td>{{cliente[1]}}</td>
+                        <td>{{cliente[2]}}</td>
+                        <td>{{cliente[3]}}</td>
+                        <td><button type="button" class="btn btn-secondary">Editar</button></td>
+                        <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/4ccef47c16.js" crossorigin="anonymous"></script>
+</body>
+</html>

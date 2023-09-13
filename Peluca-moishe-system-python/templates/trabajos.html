@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Peluca-moishe-system</title>
+</head>
+<body>
+
+    <!-- contenedor general -->
+    <div class="contenedor-pagina">
+
+        <!-- menu lateral -->
+        <div class="menu-lateral">
+
+            <!-- Logo -->
+            <img class="logo">
+
+            <!-- Bienvenida de usuario -->
+            <h5>Bienvenido, {{nombreApellidoUsuarioLogueado}}.</h5>
+
+            <!-- Nav -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('usuarios') }}"><i class="icono fa-solid fa-gear"></i>Usuarios</a></li>
+                    <li><a href="{{ url_for('clientes') }}"><i class="icono fa-solid fa-users"></i>Clientes</a></li>
+                    <li class="current"><a href="{{ url_for('trabajos') }}"><i class="icono fa-solid fa-thumbtack"></i>Trabajos</a></li>
+                    <li><a href="{{ url_for('turnos') }}"><i class="icono fa-solid fa-sack-dollar"></i>Facturación</a></li>
+                    <li><a href="{{ url_for('turnos') }}"><i class="icono fa-solid fa-calendar-days"></i>Turnos</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido de pagina -->
+        <div class="contenido-pagina">
+
+            <h2>Trabajos Activos</h2>
+
+            <!-- seccion de carga de datos -->
+            <div class="carga-datos">
+
+                <form class="formulario" action="submit">
+
+                    <div class="campos">
+                        <div class="campo">
+                            <label for="formDniCliente">Cliente</label>
+                            <input type="text" id="formDniCliente" name="formDniCliente">
+                            <button type="button" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+    
+                    <!-- contenedor de campos de formulario -->
+                    <div class="campos">
+
+                        <div class="campo">
+                            <label for="formRol">Empleado</label>
+                            <select id="formRol" name="formRol" required>
+                            <option selected disabled value="">Seleccionar...</option>
+                            {% for empleado in empleados %}
+                            <option>
+                                {{empleado[0]}}
+                            </option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="campo">
+                            <label for="formRol">Trabajo Realizado</label>
+                            <select id="formRol" name="formRol" required>
+                            <option selected disabled value="">Seleccionar...</option>
+                            {% for trabajo in tiposTrabajos %}
+                            <option>
+                                {{trabajo[0]}}
+                            </option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="formFecha">Fecha</label>
+                            <input type="date" id="formFecha" name="formFecha">
+                        </div>
+                    </div>
+
+                    <div class="campos">
+                        <div class="campo">
+                            <label for="formPrecio">Precio Actual</label>
+                            <input type="text" id="formPrecio" value="{{precio}}" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- seccion de visualizacion de datos -->
+            <div class="visualizacion-datos">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                        <th scope="col">Nro. Trabajo</th>
+                        <th scope="col">Fecha Creación</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Empleado</th>
+                        <th scope="col">Administrador</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Comentarios</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for trabajo in trabajosEnProceso %}
+                        <tr>
+                            <td>{{trabajo[0]}}</td>
+                            <td>{{trabajo[1]}}</td>
+                            <td>{{trabajo[2]}}</td>
+                            <td>{{trabajo[3]}}</td>
+                            <td>{{trabajo[4]}}</td>
+                            <td>{{trabajo[5]}}</td>
+                            <td>{{trabajo[6]}}</td>
+                            <td><button type="button" class="btn btn-secondary">Editar</button></td>
+                            <td><button type="button" class="btn btn-danger">Finalizar</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/4ccef47c16.js" crossorigin="anonymous"></script>
+</body>
+</html>

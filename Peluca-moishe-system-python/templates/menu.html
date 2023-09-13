@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Peluca-moishe-system</title>
+</head>
+<body>
+
+    <!-- contenedor general -->
+    <div class="contenedor-pagina">
+
+        <!-- menu lateral -->
+        <div class="menu-lateral">
+
+            <!-- Logo -->
+            <img class="logo">
+
+            <!-- Bienvenida de usuario -->
+            <h5>Bienvenido, {{nombreApellidoUsuarioLogueado}}.</h5>
+
+            <!-- Nav -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="{{ url_for('usuarios') }}"><i class="icono fa-solid fa-gear"></i>Usuarios</a></li>
+                    <li><a href="{{ url_for('clientes') }}"><i class="icono fa-solid fa-users"></i>Clientes</a></li>
+                    <li><a href="{{ url_for('trabajos') }}"><i class="icono fa-solid fa-thumbtack"></i>Trabajos</a></li>
+                    <li><a href="{{ url_for('turnos') }}"><i class="icono fa-solid fa-sack-dollar"></i>Facturación</a></li>
+                    <li><a href="{{ url_for('turnos') }}"><i class="icono fa-solid fa-calendar-days"></i>Turnos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/4ccef47c16.js" crossorigin="anonymous"></script>
+</body>
+</html>
